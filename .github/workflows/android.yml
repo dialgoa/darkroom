@@ -26,9 +26,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
       - name: Install pinned SDK tools
-        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"' 
       - name: Build, test and lint
         working-directory: ${{ runner.temp }}/darkroom/darkroom-0.8.2/android
         run: bash gradlew -PreuseEngine :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --no-daemon
