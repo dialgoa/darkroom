@@ -1,0 +1,29 @@
+光谱暗房 / Spectral Darkroom — unofficial Android port (0.3.0)
+
+Based on SpektraLab, copyright its contributors:
+https://github.com/JamesQiu2005/SpektraLab
+The original application and the reused C++ engine are GPL-3.0-or-later.
+The Android port is also GPL-3.0-or-later. Corresponding source is supplied
+alongside this APK in SpektraLab-main.zip.
+
+Film process models, 28 measured film/paper profiles and baked print LUTs:
+Andrea Volpato / spektrafilm, https://github.com/andreavolpato/spektrafilm
+Profiles and LUTs are CC BY-SA 4.0. The existing profile/LUT bytes are
+unchanged. Product profiles are credited in Product-Profiles-NOTICE.txt.
+Android packages the same model via the existing Vulkan backend, with a new
+Java mobile interface, JNI bridge, float colour-managed output and background exports.
+Lensfun and its calibration database are pinned to the supplied Windows build.
+Lensfun/GLib are LGPL; PCRE2 and proxy-libintl notices and corresponding source
+archives are included with the Android source. See the packaged Licenses folder.
+
+volk: MIT; Vulkan-Headers: Apache-2.0 OR MIT (headers only).
+LibRaw 0.22.2: the LGPL-2.1 option; sources are included in android/vendor.
+No Metal binaries or Apple bindings are included in the Android APK.
+
+This fork is not an official SpektraLab release and implies no endorsement.
+The original name and icons remain the property of their owners. This port
+uses a separate app name and its own vector icon.
+
+The packaged libc++ shared runtime comes from Android NDK r27c.
+See Android-NDK-runtime-NOTICE.txt for the NDK toolchain copyright,
+licence and exception texts, including the LLVM runtime components.
