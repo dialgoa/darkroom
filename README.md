@@ -12,7 +12,7 @@ Android 版本维护与界面改造由 **抖音 • Oliver** 完成。
 
 完整源码以 `darkroom-0.8.2-source.zip` 归档，和 APK 一起放在本仓库的 [Releases](https://github.com/dialgoa/darkroom/releases)。解压源码 ZIP 后可查看全部 Java / C++ 源码、原生引擎、资源、依赖和构建脚本。下载安装 APK 后，使用「导入照片」进入修图流程。胶片模拟、调整、边框、日期和导出的详细说明位于源码 ZIP 内的 `android/README.zh-CN.md`。
 
-仓库当前设为 Private，下载者需要拥有仓库访问权限。
+完整应用源码请下载 Releases 中的 `darkroom-0.8.2-source.zip`。GitHub 自动生成的 `Source code` 压缩包包含仓库文档和构建配置。
 
 ## 项目来源和署名
 
@@ -50,3 +50,4 @@ GitHub Actions 的 Android 工作流从 Release 下载并核验固定版本源�
 源码沿用 **GPL-3.0-or-later**，完整文本见 [LICENSE.txt](LICENSE.txt)。配置和 LUT 等资源遵循各自许可证，包括 CC BY-SA 4.0。第三方组件与资源的说明见 [NOTICE.txt](NOTICE.txt) 和源码 ZIP 内的 `android/licenses/`、`license/` 与上游资源目录。
 
 APK 与对应源码一起提供。再分发时应保留上游版权、许可证与来源说明。
+
