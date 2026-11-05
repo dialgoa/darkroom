@@ -1,0 +1,46 @@
+name: Android 0.8.2
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Download fixed-version source and APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/darkroom"
+          gh release download v0.8.2 --pattern 'darkroom-0.8.2-source.zip' --pattern 'darkroom-0.8.2.apk' --dir "$RUNNER_TEMP/darkroom"
+          cd "$RUNNER_TEMP/darkroom"
+          echo 'bc65599a110f5d2cf681625dd85c3b23ec06058e3f0f5d56e1d0c6237d8bb278  darkroom-0.8.2-source.zip' > SHA256SUMS
+          echo 'ffd67f5ad897dcc769807f2c0b5c04b42df796757796fad40ae2dde94ae24760  darkroom-0.8.2.apk' >> SHA256SUMS
+          sha256sum -c SHA256SUMS
+          unzip -q darkroom-0.8.2-source.zip
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install pinned SDK tools
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Build, test and lint
+        working-directory: ${{ runner.temp }}/darkroom/darkroom-0.8.2/android
+        run: bash gradlew -PreuseEngine :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: darkroom-0.8.2-rebuilt-arm64
+          path: ${{ runner.temp }}/darkroom/darkroom-0.8.2/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-test-reports
+          path: |
+            ${{ runner.temp }}/darkroom/darkroom-0.8.2/android/app/build/reports/
+          if-no-files-found: ignore
